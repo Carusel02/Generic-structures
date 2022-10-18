@@ -43,9 +43,9 @@ with len - element size
 - the find function has the principle of traversing the vector up to the index. That let's do this, in a while we read the length of an element by moving 4 bytes (after type char (1 byte) + 3 bytes padding) and after `*arr` will be increased by 8 (the size of a head) + the length of the element and then a counter increases. We keep doing this until the counter will be equal to the index. Then we display the element
 8. `print`:
 - the same way of working as find only that we scroll until we reach the length len.
-(the whole vector).
+(the whole `vector`).
 - to read the data, we first find out what type it is and then we move with x no
-of bytes depending on how they are located (for example if the banknotes are of type int8_t it means they have 1 byte. the first part of *arr is the head (in the first 4 bytes is the type and in the following is len, we jump by 8 bytes, we reach the date where the first string is located, we jump by its length and
+of bytes depending on how they are located (for example if the banknotes are of type int8_t it means they have 1 byte. the first part of `*arr` is the head (in the first 4 bytes is the type and in the following is len, we jump by 8 bytes, we reach the date where the first string is located, we jump by its length and
 we reach the first banknote, we jump with one byte we reach 2 a, we jump with another byte we reach the last line)
 - it is worth mentioning that when reading and writing, we must be careful in order to be able to figure it out
 exactly what kind (type) of data we are reading. (I also have the expression (char *)arr + x in the code, that's what it means
@@ -54,4 +54,4 @@ they jump with their length, if we had (int *)arr + x we jump with 4 * x because
 bytes).
 9. `exit`: 
 - when we read exit we exit, creating a variable that helps us move to the next iteration in while
-to no longer comply with the while condition (it's a flag)
+to no longer comply with the while condition (it's a `flag`)
