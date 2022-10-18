@@ -10,7 +10,8 @@
 - I also used the necessary casts to be able to read and writes data into the `generic vector`.
 
 ## Functions:
-1. `main`: besides the main things declared in main, I have used a while (with the purpose of an infinite loop) until we read from
+1. `main`: 
+- besides the main things declared in main, I have used a while (with the purpose of an infinite loop) until we read from
 exit command keyboard. With `strcmp` we see what command we have to execute, then depending on the requirement we enter a personalized if.
 2. `write_data`: 
 - after dynamically allocating a structure in main, I have transmitted as a parameter to be able to read and store the data
