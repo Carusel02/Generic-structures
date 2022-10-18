@@ -1,70 +1,57 @@
-# TEMA1 IOCLA
+# Generic structure
 
-## Metoda rezolvare tema:
-Ideea principala consta in alocarea dinamica a unei structuri,
-citirea unor date si adaugarea acestora in structura data_element.
-Fiind dat un vector *arr, toata memoria (nu adresele) de la acea 
-structura data_element trebuiesc copiate in vectorul *arr prin
-intermediul functiei memcpy si cu ajutorul unor functii. Toata
-implementarea are la baza o "joaca" cu dimensiunea unei citiri,
-respectiv cu bytes alocati la o citire.
+## Solution
+- The ***main idea*** consists in the dynamic allocation of a structure,  reading some data and adding them to the `data_element` structure.
+- Given a `vector *arr`, all memory (not addresses) from that one the data_element structure must be copied into the `*arr vector` bythrough the memcpy function and with the help of some functions.
+-  All the implementation is based on a **"play"** with the size of a reading, respectively with bytes allocated to a read.
 
-## Observatii:
-- Am stocat tot continutul head ului cu `memcpy`. Acesta contine
-8 bytes, 1 bytes pentru char type si urmatorii 3 tot pentru el
-(padding) si 4 bytes pentru len.
-- De asemenea, am folosit cast urile necesare pentru a putea citi
-si scrie date in vectorul generic.
+## Observation:
+- I stored all the content of the head with `memcpy`. It contains 8 bytes, 1 byte for char type and the next 3 also for him (padding) and 4 bytes for len.
+- I also used the necessary casts to be able to read and writes data into the generic vector.
 
-## Functii:
-* 1. `main` : pe langa lucrurile principale declarate in main, am
-folosit un while (cu scop de loop infinit) pana cand citim de la
-tastatura comanda exit. Cu strcmp vedem ce comanda trebuie sa executam,
-apoi in functie de cerinta intram intr un if personalizat.
-* 2. `write_data` : dupa ce am alocat dinamic o structura in main, am
-transmis o ca parametru pentru a putea face citirea si stocarea datelor
-in structura respectiva, dupa cele 3 tipuri de inserare a datelor de
-citire prezentate in cerinta. De mentionat este faptul ca trebuie 
-transmis si vectorul **arr deoarece am apelat inautrul acestei functii
-add_last (la final am fost atent sa dau free la tot ce a fost alocat)
-(a trebuit sa folosesc memcpy pentru a stoca datele in pointerul generic
-void)
-* 3. `add_last` : cu functia add_last am copiat folosit memcpy din structura
-data_element recent completata in vectorul *arr. A trebuit sa salvez
-valoarea initiala a adresei pointerului pentru a nu o pierde. Am copiat
-head ul dupa am sarit cu 8 bytes dupa am copiat tot campul void data cu
-dimensiunea extrasa din head. ( dupa am marit dimensiunea vectorului arr)
-(la inceput vectorul *arr trebuie alocat dinamic de fiecare data fix cu
-dimensiunea care trebuie adaugata )
-* 4. `write_element` : asemanatoare cu write_data, am folosit o pentru a putea
-citi si insera un element la un index. Are acelasi principiu ca si write_data,
-doar ca apeleaza alta functie. ( add_at )
-* 5. `add_at` : ideea la aceasta functie este ca intai sa realocam vectorul
-nostru pentru a i putea face spatiu noului element,apoi sa parcurgem vectorul 
-pana la index. Dupa copiem bytes de la adresa indexului + dimensiunea
-elementului inserat de la adresa indexului cu memcpy, apoi copiem de la 
-adresa indexului pana la adresa indexului + dimensiunea elementului elementul.
-dupa facem adresa vectorului *arr cea initiala pentru a printa iar daca dorim
-vectorul *arr
-* 6. `delete_at` : parcurgem vectorul pana la index, de data asta copiem bytes de la
-adresa *arr + dimensiune element sters la adresa *arr si apoi realocam vectorul 
-cu len - dimensiunea elementului
-* 7. `find` : functia find are ca principiu parcurgerea vectorului pana la index. Ca
-sa facem asta, intr un while citim lungimea unui element mutandu ne cu 4 bytes (dupa
-tipul char ( 1 byte ) + 3 bytes padding ) si dupa * arr va fi incrementat cu 8 (size ul
-unui head) + lungimea elementului iar apoi un contor creste. Facem tot asa pana cand
-contorul va fi egal cu indexul. Apoi afisam elementul
-* 8. `print` : acelasi mod de lucru ca find doar ca parcurgem pana ajungem la lungimea len.
-( tot vectorul ). Pentru a citi datele, aflam intai ce tip este si dupa ne mutam cu x nr
-de bytes in functie de felul in care se situeaza ( exemplu daca bancnotele sunt de tip int8_t
-inseamna ca au 1 byte. prima parte din *arr este headul ( in primii 4 bytes este tipul si in urmatorii
-este len ul , sarim cu 8 bytes ajungem la data unde se afla primul sir, sarim cu lungimea lui si
-ajungem la prima bancnota , sarim cu un byte ajungem la 2 a, sarim cu alt byte ajungem la ultimul sir)
-De mentionat e la citire si scriere ca trebuie obligatoriu sa facem cast pentru a ne putea da seama
-exact ce fel (tip) de date citim. ( de asemenea mai am prin cod expresia (char *)arr + x , asta inseamna
-ca ma mut cu x bytes implicit pentru ca *arr este acum de tip pointer char si, conform aritmeticii pointerilor,
-acestia sar cu lungimea lor, daca aveam (int *)arr + x saream cu 4 * x deoarece pointerul int sare cu 4
+## Functions:
+1. `main`: besides the main things declared in main, I have used a while (with the purpose of an infinite loop) until we read from
+exit command keyboard. With `strcmp` we see what command we have to execute, then depending on the requirement we enter a personalized if.
+2. `write_data`: 
+- after dynamically allocating a structure in main, I have transmitted as a parameter to be able to read and store the data
+in the respective structure, after the 3 types of data insertion
+reading presented in the request. 
+- it is worth mentioning that it must also transmitted the `**arr vector` because I called it inside this function
+`add_last` (at the end I was careful to give free everything that was allocated)
+- I had to use memcpy to store the data in the generic pointer empty
+3. `add_last`:
+- with the `add_last` function I copied memcpy from the structure `data_element` recently completed in the `vector *arr`. I had to save
+the initial value of the pointer address so as not to lose it.
+- I copied the head after I jumped by 8 bytes then I copied the entire void data field with
+the size extracted from the head. (after I increased the size of the arr vector)
+- in the beginning the `*arr vector` must be allocated dynamically each time fixed with
+size to be added
+4. `write_element`: 
+- similar to `write_data`, I used one to be able to
+read and insert an element at an index. 
+- It has the same principle as `write_data`, only that it calls another function. ( `add_at` )
+5. `add_at`: 
+- the idea of this function is to first reallocate the vector ours to make room for the new element, then let's go through the vector
+to the index. Then we copy bytes from the index address + size the inserted element from the index address with `memcpy`, then we copy from
+index address to index address + element size element.
+- then we make the `vector address *arr` the initial one to print again if we want
+the vector *arr
+6. `delete_at`: 
+- we go through the vector until the index, this time we copy bytes from `address *arr` + size deleted element at `address *arr` and then reallocate the vector
+with len - element size
+7. `find`:
+- the find function has the principle of traversing the vector up to the index. That let's do this, in a while we read the length of an element by moving 4 bytes (after type char (1 byte) + 3 bytes padding) and after `*arr` will be increased by 8 (the size of a head) + the length of the element and then a counter increases. We keep doing this until the counter will be equal to the index. Then we display the element
+8. `print`:
+- the same way of working as find only that we scroll until we reach the length len.
+(the whole vector).
+- to read the data, we first find out what type it is and then we move with x no
+of bytes depending on how they are located (for example if the banknotes are of type int8_t it means they have 1 byte. the first part of *arr is the head (in the first 4 bytes is the type and in the following is len, we jump by 8 bytes, we reach the date where the first string is located, we jump by its length and
+we reach the first banknote, we jump with one byte we reach 2 a, we jump with another byte we reach the last line)
+- it is worth mentioning that when reading and writing, we must be careful in order to be able to figure it out
+exactly what kind (type) of data we are reading. (I also have the expression (char *)arr + x in the code, that's what it means
+that I move x bytes implicitly because *arr is now of pointer char type and, according to pointer arithmetic,
+they jump with their length, if we had (int *)arr + x we jump with 4 * x because the int pointer jumps with 4
 bytes).
-* 9. `exit` : cand citim exit iesim, facand o variabila care ne ajuta sa trecem la urmatoarea iteratie in while
-sa nu mai respecte conditia din while ( e pe post de flag )
-
+9. `exit`: 
+- when we read exit we exit, creating a variable that helps us move to the next iteration in while
+to no longer comply with the while condition (it's a flag)
