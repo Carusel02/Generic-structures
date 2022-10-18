@@ -12,7 +12,8 @@
 ## Functions:
 1. `main`: 
 - besides the main things declared in main, I have used a while (with the purpose of an infinite loop) until we read from
-exit command keyboard. With `strcmp` we see what command we have to execute, then depending on the requirement we enter a personalized if.
+exit command keyboard. 
+- with `strcmp` we see what command we have to execute, then depending on the requirement we enter a personalized if.
 2. `write_data`: 
 - after dynamically allocating a structure in main, I have transmitted as a parameter to be able to read and store the data
 in the respective structure, after the 3 types of data insertion
