@@ -7,7 +7,7 @@
 
 ## Observation:
 - I stored all the content of the head with `memcpy`. It contains 8 bytes, 1 byte for char type and the next 3 also for him (padding) and 4 bytes for len.
-- I also used the necessary casts to be able to read and writes data into the generic vector.
+- I also used the necessary casts to be able to read and writes data into the `generic vector`.
 
 ## Functions:
 1. `main`: besides the main things declared in main, I have used a while (with the purpose of an infinite loop) until we read from
@@ -18,7 +18,7 @@ in the respective structure, after the 3 types of data insertion
 reading presented in the request. 
 - it is worth mentioning that it must also transmitted the `**arr vector` because I called it inside this function
 `add_last` (at the end I was careful to give free everything that was allocated)
-- I had to use memcpy to store the data in the generic pointer empty
+- I had to use memcpy to store the data in the `generic pointer` empty
 3. `add_last`:
 - with the `add_last` function I copied memcpy from the structure `data_element` recently completed in the `vector *arr`. I had to save
 the initial value of the pointer address so as not to lose it.
